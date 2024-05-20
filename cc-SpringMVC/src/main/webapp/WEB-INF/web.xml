@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--1、配置前端控制器-->
+    <servlet>
+        <servlet-name>dis</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--2、初始化spring核心配置文件-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springMVC.xml</param-value>
+        </init-param>
+        <!--
+        load-on-startup(加载时机)：程序启动时是否要加载Servlet
+        大于0：程序启动时就进行加载，初始化Servlet
+        小于0：程序启动时加载优先级较高的Servlet
+        等于0/未指定：Servlet被动加载
+        -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dis</servlet-name>
+        <!--DispatcherServlet中的url路径配置
+        / :DispatcherServlet会拦截.jsp的页面进入Controller层查找以.jsp结尾的资源名
+           如果访问的是其它页面如.html页面，DispatcherServlet会放该.html的资源名进入
+           Controller层查找以.html结尾的资源名，并执行该资源名映射的方法
+           即就是：访问以.jsp结尾的资源，该资源不会进入Controller去匹配对应的资源名
+           而是直接将webapp目录下的该.jsp视图进行展示；其它除了.jsp结尾的资源都会进入
+           Controller去匹配对应的资源名，如果匹配不到会报404
+           因此，"/"适合直接去匹配资源名(DispatcherServlet不拦截带除了.jsp后缀的所有url)
+           如果前台想直接访问静态资源(除了.jsp资源，如.html资源)，需要在springMVC.xml中配置：
+           允许前台直接除了.jsp的访问静态资源：<mvc:default-servlet-handler/>
+        /* :所有访问资源都会进入Controller层查找该资源名，如果匹配不到会报404
+        *.do :表示DispatcherServlet不会拦截名为*.do结尾的url，直接进入Controller层
+           查找资源名为*.do的资源，如果匹配不到会报404
+        -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--3、配置过滤器-->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--过滤器初始化参数-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <!--启动过滤器-->
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <!--过滤范围-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

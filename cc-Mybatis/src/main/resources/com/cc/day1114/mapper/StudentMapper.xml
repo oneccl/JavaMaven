@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cc.day1114.mapper.StudentMapper">
+    <!--在主配置文件中添加typeAliases标签，使用package标签自动匹配包下的类-->
+    <resultMap id="studentMap" type="Student">
+        <id column="id" property="stuId"></id>
+        <result column="name" property="stuName"></result>
+        <result column="sex" property="gender"></result>
+    </resultMap>
+
+    <!--   其它使用和Mybatis版本新特性   -->
+
+    <!--测试自动匹配-->
+    <!--根据id查询-->
+    <select id="queryById" resultMap="studentMap">
+        select * from student where id= "${id}"
+    </select>
+
+    <!--
+    根据多个属性查询：需要在接口方法中对多个属性使用@Param注解
+    此处sql语句中必须使用@Param注解中形参的别名
+    新特性：Mybatis的3.5版本后支持${形参}，3.5版本之前只能写${value}
+    -->
+    <!--根据id和name查询-->
+    <select id="queryCheck" resultMap="studentMap">
+        select * from student where id= #{v1} and name=#{v2}
+        -- select * from student where id= #{param1} and name=#{param2}
+        -- select * from student where id= '${v1}' and name='${v2}'
+    </select>
+
+    <!--添加-->
+    <!--
+    此处参数parameterType=Student可省略，Mybatis可自动根据接口中的参数类型推断
+    Mybatis的parameterType属性为可选项(可写可不写)
+    -->
+    <insert id="insert">
+        insert into student(id,name,sex,score) values
+            (#{stuId},#{stuName},#{gender},#{score})
+    </insert>
+
+    <!--模糊查询-->
+    <!--可以使用"%"#{keyWord}"%"形式进行模糊查询，此处不能使用单引号-->
+    <!--此处两条语句不能同时出现，使用sql注释也不能，需要使用html注释-->
+    <select id="queryByKey" resultMap="studentMap">
+        <!--select * from student where name like '%${key}%'-->
+        select * from student where name like "%"#{key}"%"
+        <!--select * from student where name like concat("%",#{key},"%")-->
+    </select>
+
+    <!--
+    根据id和name查询：
+    1）可以只根据id查询，也可以只根据name模糊查询
+    2）可以两个一起查询
+    3）可以查询所有
+    -->
+    <select id="query" resultMap="studentMap">
+        select * from student where true
+        <if test="param1 > 0">
+            and id=#{param1}
+        </if>
+        <if test="param2 != null and param2 != ''">
+            and name like concat("%",#{param2},"%")
+        </if>
+    </select>
+
+</mapper>

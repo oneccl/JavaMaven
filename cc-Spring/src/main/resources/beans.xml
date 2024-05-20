@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xmlns:p="http://www.springframework.org/schema/p"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+">
+
+    <!--基于注解-->
+    <!--
+    1. 在beans.xml头文件中配置：
+    xmlns:context="http://www.springframework.org/schema/context"
+    http://www.springframework.org/schema/context
+    https://www.springframework.org/schema/context/spring-context.xsd
+    2. 开启组件扫描(扫描包下全部)：
+    <context:component-scan base-package="需要使用注解的包"/>
+    -->
+    <context:component-scan base-package="com.cc.day1115"/>
+
+
+    <!--      IOC操作Bean管理(基于xml文件)      -->
+
+    <!--         User类(属性为基本类型)         -->
+
+    <!--创建对象-->
+    <!--id：对象的唯一表示；class：全类名-->
+    <bean id="user1" class="com.cc.day1114.bean.User"/>
+
+    <!--注入属性方式-->
+    <!--1. 创建对象,并使用类中set方法注入属性-->
+    <bean id="user2" class="com.cc.day1114.bean.User">
+        <!--底层使用set方法给属性赋值-->
+        <!--name：属性名；value：属性值-->
+        <property name="userId" value="100"/>
+        <property name="userName" value="abc"/>
+        <property name="password" value="123"/>
+    </bean>
+
+    <!--2. 创建对象,并使用类的构造器注入属性-->
+    <bean id="user3" class="com.cc.day1114.bean.User">
+        <constructor-arg name="userId" value="101"/>
+        <constructor-arg name="userName" value="aaa"/>
+        <constructor-arg name="password" value="111"/>
+    </bean>
+
+    <!--
+    3. 创建对象,并使用p空间注入属性
+    在beans标签中添加: xmlns:p="http://www.springframework.org/schema/p"
+    -->
+    <bean id="user4" class="com.cc.day1114.bean.User" p:userId="102" p:userName="acb" p:password="235"/>
+
+    <!--创建对象,给属性赋空值null-->
+    <bean id="user5" class="com.cc.day1114.bean.User">
+        <property name="userId" value="103"/>
+        <property name="userName">
+            <null/>
+        </property>
+        <property name="password">
+            <null/>
+        </property>
+    </bean>
+
+    <!--     Service层Server类(属性存在引用类型)     -->
+
+    <!--①创建对象,并注入属性外部bean-->
+    <bean id="server" class="com.cc.day1114.service.Server">
+        <!--使用ref属性根据id属性引入外部bean-->
+        <property name="dao" ref="daoImpl"/>
+    </bean>
+
+    <!--被Server类中的属性dao引入-->
+    <bean id="daoImpl" class="com.cc.day1114.dao.DaoImpl"/>
+
+    <!--②创建对象,并注入属性内部bean-->
+    <bean id="server1" class="com.cc.day1114.service.Server">
+        <property name="dao">
+            <!--使用bean标签嵌套的方式，此处id可不写-->
+            <bean class="com.cc.day1114.dao.DaoImpl"/>
+        </property>
+    </bean>
+
+    <!--   day1115Person类(属性存在数组或集合类型)   -->
+
+    <bean id="person" class="com.cc.day1115.bean.Person">
+        <!--注入属性为数组类型：使用array标签-->
+        <property name="relative">
+            <array>
+                <value>亲戚1</value>
+                <value>亲戚2</value>
+            </array>
+        </property>
+        <!--注入属性为List集合类型：使用list标签-->
+        <property name="friends">
+            <list>
+                <value>盆友A</value>
+                <value>盆友B</value>
+            </list>
+        </property>
+        <!--注入属性为Map集合类型：使用map标签，里面为entry标签-->
+        <property name="address">
+            <map>
+                <entry key="陕西" value="西安"/>
+                <entry key="中国" value="北京"/>
+            </map>
+        </property>
+        <!--注入属性为Set集合类型：使用set标签-->
+        <property name="hobby">
+            <set>
+                <value>网球</value>
+                <value>乒乓球</value>
+            </set>
+        </property>
+    </bean>
+
+    <!--     day1115MyBean类(工厂Bean:FactoryBean)     -->
+    <!--
+    Spring提供了两种bean：普通bean 和 工厂bean(FactoryBean)
+    区别：普通bean只能返回一种类型的实例；工厂Bean可以返回任意类型的实例
+    使用步骤：创建工厂类实现FactoryBean接口，重写方法
+    -->
+    <bean id="myBean" class="com.cc.day1115.bean.MyBean"/>
+
+    <!--       Bean的作用域       -->
+    <!--
+    在Spring中，可以使用bean标签scope属性设置bean的作用域，scope有以下值
+    1）singleton(默认)：创建对象为单例模式，整个IOC容器内共享该单例
+    2）protoType：当IOC容器创建，不会实例化该bean，在调用getBean()方法时返回一个新的实例
+    3）request：每次HTTP请求都会创建一个新的bean(仅适用于WebApplicationContext环境)
+    4）session：同一个HTTP请求共享一个bean(仅适用于WebApplicationContext环境)
+    -->
+
+    <!--BeanFactory 和 ApplicationContext 区别(/test/.../day1114/ServerTest.java)-->
+
+    <bean id="server2" class="com.cc.day1114.service.Server" scope="prototype">
+        <property name="dao">
+            <bean class="com.cc.day1114.dao.DaoImpl"/>
+        </property>
+    </bean>
+
+    <!--      Bean的生命周期(执行过程)      -->
+
+    <!--只要加载beans.xml配置文件，则bean中类构造方法、set方法和初始化就会执行-->
+    <!--使用类的构造器创建实例；使用类的set方法注入属性；初始化；执行方法；销毁-->
+    <bean id="beanLife" class="com.cc.day1115.bean.BeanLife" init-method="beanInit" destroy-method="beanDestroy">
+        <property name="lifeCycle" value="Bean的生命周期"/>
+    </bean>
+
+    <!--        Spring自动装配        -->
+
+    <!--原来写法-->
+    <bean id="animal" class="com.cc.day1115.bean.Animal">
+        <property name="dog" ref="dog"/>
+        <property name="cat" ref="cat"/>
+    </bean>
+
+    <bean id="dog" class="com.cc.day1115.bean.Dog"/>
+    <bean id="cat" class="com.cc.day1115.bean.Cat"/>
+
+    <!--方式1：使用autowire属性自动装配-->
+
+    <!--自动装配：根据装配规则，将属性自动注入-->
+    <!--byName：根据property标签中的name(外部bean的id)名称自动装配-->
+    <bean id="animal1" class="com.cc.day1115.bean.Animal" autowire="byName"/>
+    <!--byType：根据property标签中的class(类型)自动装配-->
+    <bean id="animal2" class="com.cc.day1115.bean.Animal" autowire="byType"/>
+
+    <!--      IOC操作Bean管理(基于注解)      -->
+
+    <!--方式2：使用@Autowired和@Resource注解-->
+    <!--
+    @Autowired：根据类型(byType)自动装配
+    @Resource：先根据name名称(byName)自动装配，如果匹配不成功，则根据类型(byType)自动装配
+    @Value：基本类型和String类型属性注入自动装配
+    -->
+    <!--在Animal类的dog属性和cat属性上添加注解@Autowired-->
+    <bean id="animal3" class="com.cc.day1115.bean.Animal"/>
+
+
+</beans>

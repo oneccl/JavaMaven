@@ -1,0 +1,92 @@
+2022-11-14 13:34:58,128 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 13:34:58,493 365    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:34:58,493 365    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:34:58,494 366    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:34:58,494 366    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:34:58,821 693    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Opening JDBC Connection
+2022-11-14 13:35:01,019 2891   [           main] DEBUG source.pooled.PooledDataSource  - Created connection 769530879.
+2022-11-14 13:35:01,019 2891   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:01,019 2891   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - ==>  Preparing: select * from user where userName like ? 
+2022-11-14 13:35:01,091 2963   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - ==> Parameters: a(String)
+2022-11-14 13:35:01,127 2999   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - <==      Total: 0
+2022-11-14 13:35:01,135 3007   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:01,137 3009   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:01,137 3009   [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 769530879 to pool.
+2022-11-14 13:35:18,282 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 13:35:18,842 560    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:18,844 562    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:18,844 562    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:18,844 562    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:19,283 1001   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Opening JDBC Connection
+2022-11-14 13:35:21,527 3245   [           main] DEBUG source.pooled.PooledDataSource  - Created connection 769530879.
+2022-11-14 13:35:21,527 3245   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:21,559 3277   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - ==>  Preparing: select * from user where userName like ? 
+2022-11-14 13:35:21,759 3477   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - ==> Parameters: c(String)
+2022-11-14 13:35:21,912 3630   [           main] DEBUG m.cc.day1109.dao.Dao.queryLike  - <==      Total: 0
+2022-11-14 13:35:21,918 3636   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:21,919 3637   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@2dde1bff]
+2022-11-14 13:35:21,920 3638   [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 769530879 to pool.
+2022-11-14 13:35:58,815 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 13:35:59,247 432    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:59,247 432    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:59,247 432    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:59,248 433    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 13:35:59,691 876    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Opening JDBC Connection
+2022-11-14 13:36:02,502 3687   [           main] DEBUG source.pooled.PooledDataSource  - Created connection 1473771722.
+2022-11-14 13:36:02,503 3688   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@57d7f8ca]
+2022-11-14 13:36:02,506 3691   [           main] DEBUG .cc.day1109.dao.Dao.queryByKey  - ==>  Preparing: -- select * from user where userName like '%a%' select * from user where userName like "%"?"%" 
+2022-11-14 13:36:02,608 3793   [           main] DEBUG .cc.day1109.dao.Dao.queryByKey  - ==> Parameters: a(String)
+2022-11-14 13:36:02,648 3833   [           main] DEBUG .cc.day1109.dao.Dao.queryByKey  - <==      Total: 3
+2022-11-14 13:36:02,653 3838   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@57d7f8ca]
+2022-11-14 13:36:02,653 3838   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@57d7f8ca]
+2022-11-14 13:36:02,654 3839   [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 1473771722 to pool.
+2022-11-14 19:43:49,714 1      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:44:02,627 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:48:44,111 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:49:39,065 1      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:50:10,477 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:51:00,830 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2022-11-14 19:51:01,078 248    [           main] DEBUG       org.apache.ibatis.io.VFS  - Class not found: org.jboss.vfs.VFS
+2022-11-14 19:51:01,079 249    [           main] DEBUG org.apache.ibatis.io.JBoss6VFS  - JBoss 6 VFS API is not available in this environment.
+2022-11-14 19:51:01,079 249    [           main] DEBUG       org.apache.ibatis.io.VFS  - Class not found: org.jboss.vfs.VirtualFile
+2022-11-14 19:51:01,080 250    [           main] DEBUG       org.apache.ibatis.io.VFS  - VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+2022-11-14 19:51:01,082 252    [           main] DEBUG       org.apache.ibatis.io.VFS  - Using VFS adapter org.apache.ibatis.io.DefaultVFS
+2022-11-14 19:51:01,082 252    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/pojo
+2022-11-14 19:51:01,083 253    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/pojo
+2022-11-14 19:51:01,174 344    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: Student.class
+2022-11-14 19:51:01,175 345    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Listing file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/pojo
+2022-11-14 19:51:01,175 345    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/pojo/Student.class
+2022-11-14 19:51:01,175 345    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/pojo/Student.class
+2022-11-14 19:51:01,176 346    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: ����   4 D
+2022-11-14 19:51:01,177 347    [           main] DEBUG .apache.ibatis.io.ResolverUtil  - Checking to see if class com.cc.day1114.pojo.Student matches criteria [is assignable to Object]
+2022-11-14 19:51:01,313 483    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 19:51:01,314 484    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 19:51:01,314 484    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 19:51:01,314 484    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2022-11-14 19:51:01,654 824    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/test-classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,655 825    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/test-classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,657 827    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: StudentMapperTest.class
+2022-11-14 19:51:01,658 828    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Listing file:/D:/JavaProjects/javamaven/cc-Mybatis/target/test-classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,658 828    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/test-classes/com/cc/day1114/mapper/StudentMapperTest.class
+2022-11-14 19:51:01,658 828    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/test-classes/com/cc/day1114/mapper/StudentMapperTest.class
+2022-11-14 19:51:01,659 829    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: ����   4 A
+2022-11-14 19:51:01,660 830    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,660 830    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,670 840    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: StudentMapper.class
+2022-11-14 19:51:01,671 841    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: StudentMapper.xml
+2022-11-14 19:51:01,671 841    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Listing file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper
+2022-11-14 19:51:01,672 842    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper/StudentMapper.class
+2022-11-14 19:51:01,672 842    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper/StudentMapper.class
+2022-11-14 19:51:01,673 843    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: ����   4    queryAll ()Ljava/util/List; 	Signature 1()Ljava/util/List<Lcom/cc/day1114/pojo/Student;>; 	queryById 2(Ljava/lang/Integer;)Lcom/cc/day1114/pojo/Student; queryByName 1(Ljava/lang/String;)Lcom/cc/day1114/pojo/Student; insert 2(Lcom/cc/day1114/pojo/Student;)Ljava/lang/Boolean; update delete ((Ljava/lang/Integer;)Ljava/lang/Boolean; 
+2022-11-14 19:51:01,673 843    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Find JAR URL: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper/StudentMapper.xml
+2022-11-14 19:51:01,674 844    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Not a JAR: file:/D:/JavaProjects/javamaven/cc-Mybatis/target/classes/com/cc/day1114/mapper/StudentMapper.xml
+2022-11-14 19:51:01,674 844    [           main] DEBUG rg.apache.ibatis.io.DefaultVFS  - Reader entry: <?xml version="1.0" encoding="UTF-8"?>
+2022-11-14 19:51:01,675 845    [           main] DEBUG .apache.ibatis.io.ResolverUtil  - Checking to see if class com.cc.day1114.mapper.StudentMapperTest matches criteria [is assignable to Object]
+2022-11-14 19:51:01,675 845    [           main] DEBUG .apache.ibatis.io.ResolverUtil  - Checking to see if class com.cc.day1114.mapper.StudentMapper matches criteria [is assignable to Object]
+2022-11-14 19:51:01,755 925    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Opening JDBC Connection
+2022-11-14 19:51:04,956 4126   [           main] DEBUG source.pooled.PooledDataSource  - Created connection 50699452.
+2022-11-14 19:51:05,019 4189   [           main] DEBUG mapper.StudentMapper.queryById  - ==>  Preparing: select * from student where id=? 
+2022-11-14 19:51:05,187 4357   [           main] DEBUG mapper.StudentMapper.queryById  - ==> Parameters: 13(Integer)
+2022-11-14 19:51:05,235 4405   [           main] DEBUG mapper.StudentMapper.queryById  - <==      Total: 1
+2022-11-14 19:51:05,245 4415   [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@3059cbc]
+2022-11-14 19:51:05,245 4415   [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 50699452 to pool.

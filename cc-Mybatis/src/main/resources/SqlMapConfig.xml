@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--Mybatis的配置文件-->
+<configuration>
+    <!--配置Mybatis环境-->
+
+    <!--方式2：使用配置文件-->
+    <properties resource="jdbcConfig.properties"/>
+<!--    <properties url="file:///D:\JavaProjects\javamaven\cc-Mybatis\src\main\resources\jdbcConfig.properties"/>-->
+
+    <!--1.开启二级缓存(全局开关，可不配置，默认开启)-->
+<!--    <settings>-->
+<!--        <setting name="cacheEnabled" value="true"/>-->
+<!--    </settings>-->
+
+    <!--设置将数据库字段去掉下划线并自动转换为驼峰命名：如stu_id=>stuId-->
+    <settings>
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+        <!--
+        autoMappingBehavior: 设置全局属性字段相同时自动映射(默认value为NONE)
+        value: PARTIAL: 除嵌套外的属性相同时自动映射; FULL: 映射所有相同属性(包括嵌套)
+        -->
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+
+    <!--package标签：使用包名自动扫描(java下)，在编写sql传递参数时，可不用使用全类名，直接写类名即可-->
+    <!--typeAlias标签：起别名-->
+    <typeAliases>
+        <package name="com.cc.day1114.pojo"/>
+<!--        <typeAlias type="com.cc.day1114.pojo.Student" alias="Student"/>-->
+    </typeAliases>
+
+    <environments default="mysql">
+
+        <!--配置mysql环境-->
+        <environment id="mysql">
+            <!--配置事务管理-->
+            <transactionManager type="JDBC"/>
+            <!--配置数据源(连接池)-->
+            <!--
+            连接池：就是存储连接(Connection)对象的容器，底层采用List集合队列(线程安全的)
+
+            连接池优点：
+
+            1、减少创建时间和次数(复用)
+            2、简化编程模式
+            3、控制资源使用
+
+            连接池工作原理：
+
+            1.连接池的创建(初始化)：创建最小连接数的连接对象
+            2.连接池的管理
+            (1)线程获取连接对象：
+            如果有空闲连接，将第一个空闲连接出列给用户使用；如果没有空闲连接且尚未达到最大连接数
+            则创建一个新的连接对象给线程；如果没有空闲连接且活跃连接已达到最大连接数，则程序会设
+            置最大等待时间；如果超过最大等待时间还没有连接，则程序会抛出栈内存溢出异常
+            (2)线程归还连接对象(释放资源)：
+            如果线程池中连接对象数小于最大连接数，则被归还的连接对象入列；如果线程池中连接对象数
+            等于最大连接数，则直接丢弃该连接对象
+            3.连接池的关闭
+            当程序关闭时，释放连接池中最大空闲数(最大连接数-最小连接数)的连接资源
+            -->
+
+            <!--type：POOLED(使用连接池) UNPOOLED(不使用连接池) -->
+            <dataSource type="POOLED">
+                <!--配置数据库连接-->
+
+                <!--方式1-->
+<!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/day1109"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="123456"/>-->
+
+                <!--方式2：使用配置文件-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--指定映射配置文件的路径(映射配置文件:每一个独立的Dao接口对应的配置文件)-->
+    <mappers>
+        <!--resource(不能使用url)：全路径-->
+        <mapper resource="com/cc/day1109/dao/DaoMapper.xml"/>
+        <mapper resource="com/cc/day1111/dao/DaoMapper.xml"/>
+        <!--使用注解开发：在主配置文件mapper标签中直接映射Dao层接口的全类名-->
+        <!--使用class属性-->
+        <mapper class="com.cc.day1112.dao.Dao"/>
+
+        <!--package标签：使用包名自动扫描(resources下)匹配xml文件-->
+        <package name="com.cc.day1114.mapper"/>
+    </mappers>
+
+</configuration>

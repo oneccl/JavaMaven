@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>javamaven</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>cc-Mybatis</module>
+        <module>cc-OPF</module>
+        <module>cc-Spring</module>
+        <module>cc-SpringMVC</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <mybatis.version>3.5.11</mybatis.version>
+        <junit.version>4.10</junit.version>
+        <mysql.version>8.0.28</mysql.version>
+        <log.version>1.2.17</log.version>
+
+        <spring-beans.version>5.2.9.RELEASE</spring-beans.version>
+        <spring-context.version>5.2.9.RELEASE</spring-context.version>
+        <spring-core.version>5.2.9.RELEASE</spring-core.version>
+        <spring-expression.version>5.2.9.RELEASE</spring-expression.version>
+        <spring-aop.version>5.2.9.RELEASE</spring-aop.version>
+        <spring-aspects.version>5.2.9.RELEASE</spring-aspects.version>
+        <spring-jdbc.version>5.2.9.RELEASE</spring-jdbc.version>
+
+        <alibaba-druid.version>1.1.9</alibaba-druid.version>
+
+        <spring-web>5.2.9.RELEASE</spring-web>
+        <spring-webmvc>5.2.9.RELEASE</spring-webmvc>
+
+        <servlet-api.version>2.5</servlet-api.version>
+        <jsp-api.version>2.0</jsp-api.version>
+
+        <lombok.version>1.18.16</lombok.version>
+
+    </properties>
+
+    <!--依赖管理-->
+    <dependencyManagement>
+        <!--添加依赖-->
+        <dependencies>
+            <!--Mybatis依赖-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!--单元测试依赖-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!--数据库依赖-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!--日志依赖-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log.version}</version>
+            </dependency>
+
+            <!--spring-beans依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring-beans.version}</version>
+            </dependency>
+
+            <!--spring-context依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-context.version}</version>
+            </dependency>
+
+            <!--spring-core依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring-core.version}</version>
+            </dependency>
+
+            <!--spring-expression依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring-expression.version}</version>
+            </dependency>
+
+            <!--spring-aop依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring-aop.version}</version>
+            </dependency>
+
+            <!--spring-aspects依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring-aspects.version}</version>
+            </dependency>
+
+            <!--spring-jdbc数据库依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-jdbc.version}</version>
+            </dependency>
+
+            <!--druid连接池(ali包的依赖)-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${alibaba-druid.version}</version>
+            </dependency>
+
+            <!--springWeb依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-web}</version>
+            </dependency>
+
+            <!--springMVC依赖-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-webmvc}</version>
+            </dependency>
+
+            <!--servlet依赖-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+
+            <!--jsp依赖-->
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp-api.version}</version>
+            </dependency>
+
+            <!--lombok依赖：用于使用注解生成一个JavaBean-->
+            <!--provided：项目使用提供依赖，打包后生成字节码不需要依赖该jar文件-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>

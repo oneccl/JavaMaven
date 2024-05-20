@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cc.day1111.dao.Dao">
+
+    <!--2.开启二级缓存(分开关)-->
+<!--    <cache/>-->
+
+    <!--   动态SQL：根据具体条件对SQL语句使用动态标签进行动态拼接   -->
+
+    <resultMap id="StudentMap" type="com.cc.day1109.bean.Student">
+        <!--column属性:列名 映射 property属性:实体类属性名-->
+        <id column="id" property="stuId"></id>
+        <result column="name" property="stuName"></result>
+        <result column="sex" property="gender"></result>
+    </resultMap>
+    
+    <!--if标签：多条件查询-->
+    <select id="queryIf" resultMap="StudentMap" parameterType="com.cc.day1109.bean.Student">
+        -- sql语句中的字段必须与表中的列名一致
+        select * from student where true
+        -- if标签的test属性(判断条件)：条件中的字段必须和实体类的对应属性名一致
+        -- 且该处字段所在的实体类必须是parameterType值所在的实体类
+        -- 判断条件和SQL语句中不能存在 小于 符号
+        <if test="stuName != null and stuName != ''">
+            <!--使用#{}：stuName自动解析为parameterType值实体类的属性-->
+            and name like #{stuName}
+        </if>
+        <if test="gender != null and gender != ''">
+            and sex = '女'
+        </if>
+    </select>
+
+    <!--sql标签：公共的sql语句，可使用include标签引入-->
+    <sql id="defaultSql">
+        select * from student
+    </sql>
+
+    <!--where标签：同if标签，where里面可使用if标签-->
+    <select id="queryWhere" resultMap="StudentMap" parameterType="com.cc.day1109.bean.Student">
+        <!--include标签：引入公共的sql-->
+        <include refid="defaultSql"></include>
+        <where>
+            name like #{stuName}
+            and score >= 90
+        </where>
+    </select>
+
+    <!--foreach标签：解决sql中in关键字查询问题-->
+    <select id="queryForeach" resultMap="StudentMap" parameterType="com.cc.day1109.bean.StuVO">
+        <include refid="defaultSql"></include>
+        -- 相当于：where id in
+        <where>
+            id in
+            <if test="stuIds != null and stuIds.size() > 0">
+                -- 相当于：(stuIds) --> (item1,item2,...)
+                -- open：左半括号 close：右半括号
+                -- collection：要遍历的集合 item：取出集合中的每个值 separator：每个值使用,分隔
+                <foreach collection="stuIds" open="(" close=")" item="stuId" separator=",">
+                    #{stuId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <!--         多表查询：一对多(实体类嵌套)         -->
+
+    <!--
+    1. 实体类嵌套：表字段与属性名相同可使用autoMapping自动映射，不用手动映射结果不会出现问题
+    -->
+    <resultMap id="AccountMap" autoMapping="true" type="com.cc.day1111.bean.Account">
+        <!--多表联查时，需使用collection进行嵌套多个实体类-->
+        <!--如果表的字段名与对应实体类的属性名不一致，必须进行两者映射-->
+        <!--如果表的字段名与对应实体类的属性名一致，如果不写映射，必须使用autoMapping属性自动映射-->
+        <!--autoMapping属性：表字段与实体类属性名一致时，可自动映射(true)-->
+        <result column="user_id" property="userId"></result>
+        <!--在主表account对应实体类属性中添加从表实体类的user属性-->
+        <!--使用connection标签嵌套从表对应的实体类-->
+        <!--javaType：主表实体类中的user属性对应的从表实体类全类名-->
+        <!--javaType(实体类类型)：属性是实体类类型，使用javaType-->
+        <collection property="user" autoMapping="true" javaType="com.cc.day1111.bean.User">
+        </collection>
+    </resultMap>
+
+    <!--查询account表中每个账户对应的用户信息-->
+    <select id="queryAccount" resultMap="AccountMap">
+        select * from
+        account a, user u
+        where a.user_id = u.userId
+    </select>
+
+    <!--         多表查询：一对多(集合类型<泛型(实体类嵌套)>)         -->
+
+    <!--
+    2. 集合类型<泛型(实体类嵌套)>：所有表字段和属性名都必须手动映射(即使相同)，否则结果会出现问题
+    -->
+    <resultMap id="UserMap" autoMapping="true" type="com.cc.day1111.bean.User">
+        <id column="userId" property="userId"></id>
+        <result column="userName" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="birthday" property="birthday"></result>
+        <!--ofType(集合类型的泛型)：属性是集合类型，使用ofType-->
+        <collection property="accounts" ofType="com.cc.day1111.bean.Account">
+            <id column="accId" property="accId"></id>
+            <result column="user_id" property="userId"></result>
+            <result column="balance" property="balance"></result>
+        </collection>
+    </resultMap>
+
+    <!--查询user表每个用户对应的账户信息-->
+    <select id="queryUser" resultMap="UserMap">
+        select * from
+        user u, account a
+        where a.user_id = u.userId;
+    </select>
+
+    <!--         多表查询：多对多(集合类型<泛型(实体类嵌套)>)         -->
+
+    <resultMap id="NewStudentMap" type="com.cc.day1111.bean.Student">
+        <id column="id" property="stuId"></id>
+        <result column="name" property="stuName"></result>
+        <result column="sex" property="gender"></result>
+        <result column="score" property="score"></result>
+        <collection property="teachers" ofType="com.cc.day1111.bean.Teacher">
+            <id column="teaId" property="teaId"></id>
+            <result column="teaName" property="teaName"></result>
+            <result column="teaSex" property="teaSex"></result>
+        </collection>
+    </resultMap>
+
+    <!--查询每个学生的信息(包括其对应老师及信息)-->
+    <select id="queryStudent" resultMap="NewStudentMap">
+        select
+            s.id,
+            s.name,
+            s.sex,
+            s.score,
+            t.teaId,
+            t.teaName,
+            t.teaSex
+        from
+            student s,
+            middle m,
+            teacher t
+        where
+            s.id=m.stuPriKey and t.teaId=m.teaPriKey
+    </select>
+
+</mapper>

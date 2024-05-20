@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cc.day1109.dao.Dao">
+    <!--Mybatis参数(标签属性)-->
+
+    <!--
+    1. id属性：方法名
+    2. parameterType属性：方法的参数类型(基本数据类型和引用数据类型)
+       注意事项：
+       1）JDK提供的基本数据类型和引用数据类型直接写类型名称
+       2）实体类(非JDK提供的)必须写全类名
+    3. resultType属性：方法返回值类型
+    4. resultMap属性：建立数据库表的列名与实体类的属性名间的映射
+       为了解决实体类的属性名与数据库表的不一致的情况
+    -->
+
+    <!--
+    #{} 和 ${} 区别
+    1. #{}：表示占位符(基本数据类型)，可以自动解析parameterType值实体类的属性
+       ${}：表示拼接到sql语句中的内容，不能解析parameterType值实体类的属性
+    2. #{}: 底层使用PreparedStatement预处理，避免了sql注入
+       ${}: 底层使用Statement，使用sql注入，存在安全问题
+    3. #{形参/实体类字段名}：只能填入基本数据类型形参或实体类字段名，如果方法参数类型
+       parameterType是实体类(引用类型)，则#{}中的内容必须和类的字段属性名一致
+       ${value}：#{}中只能填入value，value可以接收基本数据类型的值，使用'${value}'拼接
+    -->
+
+    <!--             Student实体类-student表             -->
+    <!--               列名与属性名非一一对应               -->
+
+    <!--
+    resultMap标签
+    id属性：被sql语句所在的标签引用
+    type属性：方法的返回值类型
+    id标签：数据库主键映射实体类的属性名
+    result标签：数据库非主键映射实体类的属性名
+    -->
+    <resultMap id="StudentMap" type="com.cc.day1109.bean.Student">
+       <!--column属性:列名 映射 property属性:实体类属性名-->
+        <id column="id" property="stuId"></id>
+        <result column="name" property="stuName"></result>
+        <result column="sex" property="gender"></result>
+    </resultMap>
+
+    <!--resultMap属性：映射到resultMap标签中的id属性，并给type属性指定返回值类型-->
+    <select id="query" resultMap="StudentMap">
+        select * from student
+    </select>
+
+    <!--             User实体类-user表             -->
+    <!--             列名与属性名一一对应             -->
+
+    <!--查询所有-->
+    <select id="queryAll" resultType="com.cc.day1109.bean.User">
+        select * from user
+    </select>
+
+    <!--根据id查询-->
+    <select id="queryById" resultType="com.cc.day1109.bean.User" parameterType="Integer">
+        select * from user where userId=#{id}
+    </select>
+
+    <!--根据用户名查询-->
+    <select id="queryByName" resultType="com.cc.day1109.bean.User" parameterType="String">
+        select * from user where userName=#{name}
+    </select>
+
+    <!--添加用户-->
+    <!--由于传入的参数是实体类，#{}中的内容必须和类的字段属性名一致-->
+    <insert id="insert" parameterType="com.cc.day1109.bean.User">
+        insert into user(userName,password,birthday) values
+        (#{userName},#{password},#{birthday})
+    </insert>
+
+    <!--修改用户-->
+    <!--由于传入的参数是实体类，#{}中的内容必须和类的字段属性名一致-->
+    <update id="update" parameterType="com.cc.day1109.bean.User">
+        update user set userName=#{userName},password=#{password},birthday=#{birthday} where userId=#{userId}
+    </update>
+
+    <!--删除用户-->
+    <delete id="delete" parameterType="Integer">
+        delete from user where userId=#{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="queryByKey" resultType="com.cc.day1109.bean.User" parameterType="String">
+    <!--select * from user where userName like #{keyWord}-->
+--     select * from user where userName like '%${value}%'
+    select * from user where userName like "%"#{keyWord}"%"
+</select>
+
+    <!--查询总数-->
+    <select id="count" resultType="Long">
+        select count(userId) from user
+    </select>
+
+    <!--查询总和-->
+    <select id="sum" resultType="Long" parameterType="String">
+        select sum(${value}) from user
+    </select>
+
+    <!--模糊查询:传入实体类的UserVO包装对象-->
+    <select id="queryLike" parameterType="com.cc.day1109.bean.UserVO" resultType="com.cc.day1109.bean.User">
+        select * from user where userName like #{user.userName}
+    </select>
+
+</mapper>

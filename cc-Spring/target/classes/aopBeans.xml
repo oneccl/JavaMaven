@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+
+    <!--
+    Spring的通知(使用注解)
+    1)配置xml，添加如下：
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    2)创建静态代理类，使用@Aspect注解，使用@Component注解实现静态代理对象
+    3)开启组件扫描，开启AspectJ静态代理对象配置，指定CGLIB代理
+    -->
+
+    <!--开启组件/注解扫描-->
+    <context:component-scan base-package="com.cc.day1116.aop"/>
+
+    <!--
+    开启AspectJ静态代理对象配置
+    proxy-target-class="true"：指定CGLIB代理
+    -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>
